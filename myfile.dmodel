@@ -1,0 +1,38 @@
+datatype Int
+datatype String
+
+package exams {
+	 
+entity Student {
+	firstName: String min:3
+	lastName:String
+	many examsTaken:ExamInstance    
+} 
+
+entity Grade{
+	name:String pattern : 'ss'
+	maxStudents:Int opt  min:3
+}
+
+entity Exam{
+	name:String opt
+	many questions: Question
+}
+
+entity ExamInstance{
+	exam:Exam
+}
+
+entity Question{
+	text:String = '"sss"'
+	many answers:Answer
+	correctChoice: Answer
+	expln :String
+}
+
+entity Answer{
+	text:String
+}
+
+
+}
