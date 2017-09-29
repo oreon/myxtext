@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package 
+			uri = "http://www.wcmda.org/domaindsl/DomainDsl"
+			class = "org.wcmda.domaindsl.domainDsl.DomainDslPackage"
+			genModel = "model/generated/DomainDsl.genmodel" />
+	</extension>
+</plugin>

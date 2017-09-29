@@ -1,0 +1,46 @@
+grammar org.wcmda.domaindsl.DomainDsl with org.eclipse.xtext.common.Terminals
+
+generate domainDsl "http://www.wcmda.org/domaindsl/DomainDsl"
+
+Domainmodel:
+    (elements+=AbstractElement)*;
+    
+AbstractElement:
+    PackageDeclaration | Type | Import;
+    
+PackageDeclaration:
+    'package' name=QualifiedName '{'
+        (elements+=AbstractElement)*
+    '}';
+    
+Import:
+    'import' importedNamespace=QualifiedNameWithWildcard;
+    
+QualifiedNameWithWildcard:
+    QualifiedName '.*'?;
+    
+QualifiedName:
+    ID ('.' ID)*;
+    
+EType:
+	name= 'Int' | 'String' | 'Long' | 'Double' | 'Currency' | 'Date' | 'DateTime' | 'TimeStamp';
+  
+Type:
+    DataType | Entity;
+  
+DataType:
+    'datatype' name=ID;
+    
+Entity:
+    'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
+        (features+=Feature)*
+    '}';
+    
+valueType:INT|STRING;
+
+Validator:  
+	name='min' ':' value=INT|name='max' ':' value=INT|name='opt'|name='pattern' ':' svalue=STRING ;    
+     
+Feature:
+   (many?='many')? name=ID ':' type=[Type|QualifiedName] ('='defaultVal=STRING)?   (valdiators+=Validator)*;
+    
